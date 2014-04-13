@@ -1,11 +1,13 @@
-all: clean build test gcov
+all: clean build test gcov valgrind
 
 clean:
 	rm -fr test inputs/ *.gcov *.gcda *.gcno
-build:
+build: clean
 	g++ -I../wet1 main.cpp -o test -g -fprofile-arcs -ftest-coverage
-test:
+test: build
 	./run_tests.sh
-gcov:
+gcov: test
 	gcov main.cpp
-.PHONY: build test gcov
+valgrind: build
+	./test.py 1000 | valgrind ./test
+.PHONY: build test gcov valgrind

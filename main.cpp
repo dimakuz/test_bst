@@ -22,11 +22,13 @@ int main() {
 	while (!stop) {
 		std::cin >> cmd;
 		switch (cmd) {
+		// Correct insert
 		case 'i':
 			std::cin >> i;
 			t.insert(i);
 			t.checkCorrectness();
 			break;
+		// Incorrect insert
 		case 'I':
 			std::cin >> i;
 			j = 0;
@@ -38,11 +40,13 @@ int main() {
 			if (!j)
 				throw std::exception();
 			break;
+		// Correct remove
 		case 'r':
 			std::cin >> i;
 			t.remove(i);
 			t.checkCorrectness();
 			break;
+		// Incorrect remove
 		case 'R':
 			std::cin >> i;
 			j = 0;
@@ -54,16 +58,19 @@ int main() {
 			if (!j)
 				throw std::exception();
 			break;
+		// Find exact element
 		case 'F':
 			std::cin >> i;
 			if (i != t.findByParameter(IntParam(i)))
 				throw std::exception();
 			break;
+		// Find less/equal element
 		case 'f':
 			std::cin >> i;
 			if (i < t.findByParameter(IntParam(i)))
 				throw std::exception();
 			break;
+		// Incorrect find
 		case 'G':
 			std::cin >> i;
 			j = 0;
@@ -76,16 +83,19 @@ int main() {
 			if (!j)
 				throw std::exception();
 			break;
+		// Validate size
 		case 's':
 			std::cin >> i;
 			if (i != t.size())
 				throw std::exception();
 			break;
+		// Get neighbor
 		case 'n':
 			std::cin >> i >> j;
 			if (j != t.getNeighbor(i))
 				throw std::exception();
 			break;
+		// Validate no neighbor
 		case 'N':
 			std::cin >> i;
 			j = 0;
@@ -98,9 +108,11 @@ int main() {
 			if (!j)
 				throw std::exception();
 			break;
+		// Reset tree
 		case '*':
 			t = AVLTree<int>();
 			break;
+		// Quit
 		case 'q':
 			stop = 1;
 			break;
