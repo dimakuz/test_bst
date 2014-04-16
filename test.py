@@ -91,6 +91,11 @@ def tree_clear():
     print 'c'
 
 
+@tree
+def tree_inc():
+    print 'W'
+
+
 @list_
 def list_append(n):
     print 'a%d' % n
@@ -193,6 +198,10 @@ def tree_random_order(order):
                 tree_remove(ele)
                 tree_remove_check(ele)
             tree_check_sanity(in_tree)
+            if random.randint(0, 9) == 0:
+                tree_inc()
+                in_tree = set(map(lambda x: x + 1, in_tree))
+                tree_check_sanity(in_tree)
 
     while len(in_tree) > 0:
         tree_remove(in_tree.pop())

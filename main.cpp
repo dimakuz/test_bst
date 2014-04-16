@@ -14,6 +14,20 @@ int IntParam::compare(int v) const {
 	return this->m_t - v;
 }
 
+
+class IntWalkParam : public AbstractWalkParameter<int> {
+private:
+	int m_off;
+public:
+	IntWalkParam(int off) : m_off(off)  { }
+	virtual ~IntWalkParam() { }
+	virtual void apply(int &v);
+};
+
+void IntWalkParam::apply(int &v) {
+	v += this->m_off;
+}
+
 static int handleTreeCommand(AVLTree<int> &t, List<int> &l) {
 	int i, j;
 	char cmd;
@@ -130,6 +144,13 @@ static int handleTreeCommand(AVLTree<int> &t, List<int> &l) {
 			lst.clear();
 		}
 		t.checkCorrectness();
+		break;
+	case 'W':
+		{
+			IntWalkParam p(1);
+			t.walkNodes(p);
+			t.checkCorrectness();
+		}
 		break;
 	case 'c':
 		t.clear();
